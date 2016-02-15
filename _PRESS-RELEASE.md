@@ -19,26 +19,55 @@ Once the project moves into development, the press release can be used as a touc
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
+  Mealy: a meal reservation app for people who love to eat together
+
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
 
+  The niche market is communities of neighbors who have meals together on a weekly basis, such as co-housing communities. They get a streamlined signup and notification system that reduces organization and work for individuals.
+
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  
+  User-cooks can post a meal they want to organize: the date, the menu and other information. User-eaters can sign up for meals.
+
+  E-mails automatically go out to group list-serv when meal is created, and two days before the meal. 
+
+  Users can indicate preferences (gluten-free, vegetarian) and plate sizes (full, half). They can see the price(s) of the meal
+
+  User profiles and default preferences are saved.
+
+  There's a payment system: a user-eater can pay by PayPal, or run up a tab which can be used by treasurer to bill the user.
+
+  Cooks can see the budget, based on how many reservations have been made, for their meal.
+
 
 ## Problem ##
   > Describe the problem your product solves.
 
+  Communities should focus on cooking and eating, not the headache of sending out emails, summing up budgets, and billing eaters.
+
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+
+  Mealy handles the emails, the budget for the meal, and has a billing system. It stores user preferences making reservation a breeze.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
 
+  "Let's focus on cooking and eating, not busywork that computers can do!"
+
 ## How to Get Started ##
   > Describe how easy it is to get started.
+
+  "Just go on the website and click a button to post a meal, or click a different button to sign up for a meal!"
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
 
+  "Mealy saves me hours of time every week, and has made the whole community meal experience a lot more enjoyable for me and everyone I know!"
+
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+
+  "Go to the website and try it out!"
