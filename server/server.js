@@ -33,10 +33,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', 
   function(req, res) {
     res.send('hello world');
-  });
+});
 
 var port = process.env.PORT || 2000;
 
-app.listen(2000);
+app.listen(port);
 
 console.log('Server now listening on port ' + port);
