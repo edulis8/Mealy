@@ -1,5 +1,21 @@
 <div class="container">
   <div class="jumbotron">
-    <form actio></form>
+    <form name="cook" ng-submit="">
+
+      <!-- <div class="error" ng-if='shortener.shortenInput.$invalid'>Please enter a valid URL</div> -->
+      <h3>What do you want to cook?</h3>
+
+      <input type='text' name='menu' ng-model='a' placeholder="Main menu">
+      <h5>Alternative options?</h5>
+      <input type='text' name='veg-menu' ng-model='b' placeholder="Vegetarian alternative">
+      <input type='text' name='glut-menu' ng-model='c' placeholder="Gluten-free alternative">
+      <h5>When do you want to serve it? </h5>
+      <input type="date" name="date">
+      <input type="time" value="18:00">
+      <h5>Your name?</h5>
+      <input type='text' name='cook-name' ng-model='d' placeholder="Hail to the cook!">
+
+      <button ng-disabled ='cook.$pristine'>Submit</button>
+    </form>
   </div>
 </div>
