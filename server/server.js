@@ -15,12 +15,13 @@ db.once('open', function() {
   console.log('DB connection open');
 });
 ////////
-
 var app = express();
 app.use(morgan('dev'));
 // bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/../client'));
+
 
 // session
 // app.use(session({
@@ -30,10 +31,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   saveUninitialized: false
 // }));
 
-app.get('/', 
-  function(req, res) {
-    res.send('hello world');
-});
+
+
+// app.get('/', 
+//   function(req, res) {
+//     //res.redirect('hello world');
+// });
 
 var port = process.env.PORT || 2000;
 
