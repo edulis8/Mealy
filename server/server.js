@@ -22,11 +22,21 @@ app.use(express.static(__dirname + '/../client'));
 
 // app.get('/links', util.checkUser, handler.fetchLinks);
 // app.post('/links', handler.saveLink);
+
+app.get('/api/meals', function(req, res){
+  Meal.find({}).exec(function(err, meals){
+    if(err){
+      console.log(err);
+      res.send(500);
+      return;
+    }
+    res.send(200, meals);
+  });
+});
+
 app.post('/api/meals', function(req, res){
   console.log('ping', req.body);
-
   var incoming = req.body;
-
   var meal = new Meal({
     menu: incoming.menu,
     veg: incoming.veg,
@@ -45,7 +55,6 @@ app.post('/api/meals', function(req, res){
       res.send(200, newMeal);
     }
   });
-
 });
 // exports.fetchLinks = function(req, res) {
 //   // video 1hr
@@ -101,7 +110,7 @@ app.post('/api/meals', function(req, res){
 //     //res.redirect('hello world');
 // });
 
-var port = process.env.PORT || 2000;
+var port = process.env.PORT || 8000;
 
 app.listen(port);
 

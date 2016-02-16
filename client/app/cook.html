@@ -19,6 +19,9 @@
       <input type='text' name='cook-name' ng-model='meal.cookname' placeholder="Hail to the cook!">
 
       <button ng-disabled ='cook.$pristine'>Submit</button>
+
     </form>
+
   </div>
+    <div class='btn btn-lg btn-info' ng-if='sent'>Yay! Your meal was posted. Click here to see all meals.</div>
 </div>

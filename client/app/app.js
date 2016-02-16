@@ -13,6 +13,10 @@ $routeProvider
       templateUrl: 'app/cook.html',
       controller: 'CookController'
     })
+     .when('/eat', {
+      templateUrl: 'app/eat.html',
+     controller: 'EatController'
+    })
     
     .otherwise({
       redirectTo: '/nowhere'
@@ -34,10 +38,28 @@ $routeProvider
     .then(function(data){
       console.log('addMeal data returned', data);
       $scope.sent = true;
+      $scope.meal = {};
     });
   };
 
 })
+//////// Eat Controller ////////////////
+////////////////////////////////////////
+.controller('EatController', function($scope, Eat){
+  angular.extend($scope, Eat);
+
+  $scope.getMeals = function(){
+    Eat.getMeals()
+    .then(function(data){
+      console.log('data in $scope.getMeals', data);
+      $scope.meals = data;
+    });
+  };
+
+  $scope.getMeals();
+
+})
+/////////////////////////////////////////
 /////////////////////
 // Cook Factory ////
 .factory('Cook', function($http){
@@ -58,3 +80,19 @@ $routeProvider
   };
 
 })
+/////////////////////
+// Eat Factory ////
+.factory('Eat', function($http){
+  var getMeals = function(){
+    return $http({
+      method: 'GET',
+      url: 'api/meals',
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+  return {
+    getMeals: getMeals
+  };
+});

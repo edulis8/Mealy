@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 
-var mongoURI = process.env.MONGOLAB_URI || 'mongodb://localhost:mvp';
+var mongoURI = process.env.MONGOLAB_URI || 'mongodb://localhost/mvp';
 
 console.log('mongoURI', mongoURI);
 
@@ -30,6 +30,6 @@ var mealsSchema = mongoose.Schema ({
   });
 
 
-var Meal = mongoose.model('Meal', mealsSchema);
+var Meal = mongoose.model('Meals', mealsSchema);
 
 module.exports = Meal;
