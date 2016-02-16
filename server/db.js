@@ -26,7 +26,8 @@ var mealsSchema = mongoose.Schema ({
     veg: String,
     glut: String,
     cookname: String,
-    date: Date
+    date: Date,
+    eaters: []
   });
 
 

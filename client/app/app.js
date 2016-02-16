@@ -27,8 +27,11 @@ $routeProvider
 .controller('CookController', function($scope, Cook){
   angular.extend($scope, Cook);
 
+  $scope.reserved = false;
+
   $scope.meal = {
     //time: '18:00:00'
+    eaters : []
   };
   $scope.sent = false; // for showing some kind of success div
 
@@ -41,12 +44,31 @@ $routeProvider
       $scope.meal = {};
     });
   };
+/////repeat/////
+  $scope.reserve = function(eater){
+    console.log($scope.meal);
+    console.log(eater);
+    $scope.meal.eaters.push(eater)
+    console.log($scope.meal);
+    // GOT TO POST TO DB
+  };
+
+  console.log($scope.reserved);
+
+  $scope.beginReservation = function(){
+    console.log(this.meal);
+    $scope.reserved = true;
+    // set meal object to be meal just clicked on
+    $scope.meal = this.meal;
+    console.log($scope.meal);
+  };
 
 })
 //////// Eat Controller ////////////////
 ////////////////////////////////////////
-.controller('EatController', function($scope, Eat){
+.controller('EatController', function($scope, Eat, Cook){
   angular.extend($scope, Eat);
+
 
   $scope.getMeals = function(){
     Eat.getMeals()
@@ -55,6 +77,12 @@ $routeProvider
       $scope.meals = data;
     });
   };
+
+
+
+  $scope.reserve = function(){
+    console.log($scope.meal);
+  }
 
   $scope.getMeals();
 

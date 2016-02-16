@@ -42,7 +42,8 @@ app.post('/api/meals', function(req, res){
     veg: incoming.veg,
     glut: incoming.glut,
     cookname: incoming.cookname,
-    date: incoming.date
+    date: incoming.date,
+    eaters: incoming.eaters
   });
 
   meal.save(function(err, newMeal){
