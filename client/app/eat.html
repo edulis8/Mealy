@@ -10,6 +10,7 @@
             <th>Gluten-Free Option</th>
             <th>Cook's Name</th>
             <th>Mmm...</th>
+            <th>Info for Cooks</th>
           </tr>
         </thead>
         <tbody>
@@ -22,13 +23,23 @@
               <td>{{meal.veg}}</td>
               <td>{{meal.glut}}</td>
               <td>{{meal.cookname}}</td>
-
               <td><button ng-click='beginReservation()' class="btn btn-warning">Reserve</button></td>
+              <td><span ng-click='showEaters()' class="btn btn-link">Meal Info</span></td>
+
             </tr>
            
           </tbody>
         </table>
   </div>
+    <div ng-if='reserveSuccess'>
+      <div class="well">
+        <div class="center-block">
+          <h6>Thanks! Your reservations has been made for:</h6>
+          <p class="lead">{{meal.date | date: 'fullDate'}}</p>
+          <p>with head cook {{meal.cookname}}</p>
+         </div> 
+      </div>
+    </div>
 
     <!-- <div class="jumbotron" ng-if="reserve"> -->
       <div class="well" ng-if="showNameForm">
@@ -42,6 +53,11 @@
         </form>
       </div>
     <!-- </div> -->
+     <div class="well" ng-if="showEatersBool">
+        <h4 class="lead text-center">Your Budget: {{meal.eaters.length * 4 | currency}}</h4>
+        <ul class="lead text-center">Here's the eaters for your meal:</ul>
+        <li class="text-center" ng-repeat="eater in meal.eaters">{{eater}}</li>
+      </div>
 
   <!-- </div> -->
 

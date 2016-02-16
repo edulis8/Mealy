@@ -29,6 +29,7 @@ $routeProvider
 
   $scope.showNameForm = false;
   $scope.reserveSuccess = false;
+  $scope.showEatersBool = false;
 
   $scope.meal = {
     //time: '18:00:00'
@@ -55,17 +56,28 @@ $routeProvider
     // will this make a repeat?
     Eat.updateMeal($scope.meal); //api.eaters
     $scope.showNameForm = false;
+    // for div after reservation submission
     $scope.reserveSuccess = true;
   };
 
   console.log($scope.showNameForm);
 
   $scope.beginReservation = function(){
+    $scope.reserveSuccess = false;
     console.log(this.meal);
     $scope.showNameForm = true;
     // set meal object to be meal just clicked on
     $scope.meal = this.meal;
     console.log($scope.meal);
+  };
+
+  $scope.showEaters = function(){
+    $scope.showNameForm = false;
+    $scope.reserveSuccess = false;
+    console.log(this.meal.eaters);
+    $scope.showEatersBool = true;
+    // set meal object to be meal just clicked on
+    $scope.meal = this.meal;
   };
 
 })
