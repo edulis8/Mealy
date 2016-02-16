@@ -16,12 +16,13 @@
 
   <!-- <div ng-repeat="meal in meals"> -->
       
-            <tr ng-repeat="meal in meals">
+            <tr ng-repeat="meal in meals | orderBy:'date'">
+              <td> {{ meal.date | date: 'fullDate'}} </td>
               <td>{{meal.menu}}</td>
               <td>{{meal.veg}}</td>
               <td>{{meal.glut}}</td>
               <td>{{meal.cookname}}</td>
-              <td> {{ meal.date | date: 'fullDate' }} </td>
+
               <td><button ng-click='beginReservation()' class="btn btn-warning">Reserve</button></td>
             </tr>
            
@@ -30,10 +31,14 @@
   </div>
 
     <!-- <div class="jumbotron" ng-if="reserve"> -->
-      <div class="well" ng-if="reserved">
+      <div class="well" ng-if="showNameForm">
         <p class="lead text-center">That'll be $4</p>
         <form name='reservation' ng-submit='reserve(eaterName)'>
-          <input class="center-block" type="text" name="reserve-input" placeholder="What's your name?" ng-model="eaterName" />
+          <input class="center-block" type="text" name="reserve-input" placeholder="What's your name?" ng-model="eaterName" required />
+          <br>
+          <button class="btn btn-warning center-block">Put it on my tab</button>
+          <br>
+          <button class="center-block"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" /></button>
         </form>
       </div>
     <!-- </div> -->

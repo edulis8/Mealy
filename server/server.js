@@ -57,6 +57,45 @@ app.post('/api/meals', function(req, res){
     }
   });
 });
+
+
+app.post('/api/eaters', function(req, res){
+  console.log('api/meals', req.body);
+  var incoming = req.body;
+
+  Meal.findOne({ _id : incoming._id }).exec(function(err, match){
+    if(err){
+      console.log('error api/eaters saving');
+      res.send(500);
+    } 
+    if(match){
+      console.log('before',match.eaters);
+      console.log('incoming eaters', incoming.eaters);
+      match.eaters = incoming.eaters;
+      match.save(function(err, newEaters){
+        if(err){console.log('error saving new eaters'); res.send(500);}
+        else{
+          console.log('success saving new eaters')
+          console.log('after saving success',match.eaters);
+          res.sendStatus(201, 'yo');
+        }
+      });
+    } 
+  });
+
+});
+ 
+
+  // meal.save(function(err, newMeal){
+  //   if(err){
+  //     console.log('error saving');
+  //     res.send(500);
+  //   } else {
+  //     console.log('success saving?')
+  //     console.log('Meal', meal.menu, meal.veg)
+  //     res.send(200, newMeal);
+  //   }
+  // });
 // exports.fetchLinks = function(req, res) {
 //   // video 1hr
 //   Link.find({}).exec(function(err, links) {

@@ -23,5 +23,8 @@
     </form>
 
   </div>
-    <div class='btn btn-lg btn-info' ng-if='sent'>Yay! Your meal was posted. Click here to see all meals.</div>
+    <div ng-if='sent'>
+      <div class='well'>An email is now being sent to the list-serve. Another reminder e-mail will be sent out two days before the meal. </div>
+      <a href='#/eat' class='btn btn-lg btn-info' >Yay! Your meal was posted to the meals list. Click here to see all meals.</a>
+    </div>
 </div>

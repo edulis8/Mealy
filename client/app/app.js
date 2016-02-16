@@ -24,10 +24,11 @@ $routeProvider
 
 })
 // Cook Controller //////
-.controller('CookController', function($scope, Cook){
+.controller('CookController', function($scope, Cook, Eat){
   angular.extend($scope, Cook);
 
-  $scope.reserved = false;
+  $scope.showNameForm = false;
+  $scope.reserveSuccess = false;
 
   $scope.meal = {
     //time: '18:00:00'
@@ -48,16 +49,20 @@ $routeProvider
   $scope.reserve = function(eater){
     console.log($scope.meal);
     console.log(eater);
-    $scope.meal.eaters.push(eater)
+    $scope.meal.eaters.push(eater);
     console.log($scope.meal);
     // GOT TO POST TO DB
+    // will this make a repeat?
+    Eat.updateMeal($scope.meal); //api.eaters
+    $scope.showNameForm = false;
+    $scope.reserveSuccess = true;
   };
 
-  console.log($scope.reserved);
+  console.log($scope.showNameForm);
 
   $scope.beginReservation = function(){
     console.log(this.meal);
-    $scope.reserved = true;
+    $scope.showNameForm = true;
     // set meal object to be meal just clicked on
     $scope.meal = this.meal;
     console.log($scope.meal);
@@ -69,7 +74,7 @@ $routeProvider
 .controller('EatController', function($scope, Eat, Cook){
   angular.extend($scope, Eat);
 
-
+  //// GETS MEALS JSON
   $scope.getMeals = function(){
     Eat.getMeals()
     .then(function(data){
@@ -120,7 +125,21 @@ $routeProvider
       return resp.data;
     });
   };
+
+  var updateMeal = function( mealObject ){
+    console.log('update mealObject', mealObject);
+    return $http({
+      method: 'POST',
+      url: '/api/eaters',
+      data: mealObject
+    }).then(function(resp){
+      console.log('Posted!', resp.data);
+      return resp.data;
+    });
+  };
+
   return {
+    updateMeal: updateMeal,
     getMeals: getMeals
   };
 });
