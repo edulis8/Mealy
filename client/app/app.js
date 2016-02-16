@@ -112,6 +112,10 @@ $routeProvider
   $scope.getMeals();
 
 })
+/////////////////////////////////////////
+/////////////////////
+// Profile Controller ////
+
 .controller('ProfileController', function($scope, Profile){
   angular.extend($scope, Profile);
 
