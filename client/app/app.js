@@ -11,7 +11,7 @@ $routeProvider
     })
      .when('/cook', {
       templateUrl: 'app/cook.html',
-      controller: 'HomeController'
+      controller: 'CookController'
     })
     
     .otherwise({
@@ -19,27 +19,42 @@ $routeProvider
     });
 
 })
+// Cook Controller //////
+.controller('CookController', function($scope, Cook){
+  angular.extend($scope, Cook);
 
-.controller('HomeController', function($scope){
+  $scope.meal = {
+    //time: '18:00:00'
+  };
+  $scope.sent = false; // for showing some kind of success div
+
+  $scope.addMeal = function(meal){
+    console.log(meal)
+    Cook.postMeal(meal)
+    .then(function(data){
+      console.log('addMeal data returned', data);
+      $scope.sent = true;
+    });
+  };
 
 })
-
-
+/////////////////////
+// Cook Factory ////
 .factory('Cook', function($http){
-
-  var postLink = function( link ){
-    console.log('post link', link);
-    //link = JSON.stringify(link);
+  var postMeal = function( mealObject ){
+    console.log('post mealObject', mealObject);
     return $http({
       method: 'POST',
       url: '/api/links',
-      data: link
+      data: mealObject
     }).then(function(resp){
       console.log('Posted!', resp.data);
       return resp.data;
     });
   };
 
-  return {postLink : postLink};
+  return {
+    postMeal : postMeal
+  };
 
 })
