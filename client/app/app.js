@@ -17,6 +17,15 @@ $routeProvider
       templateUrl: 'app/eat.html',
      controller: 'EatController'
     })
+     .when('/signup', {
+      templateUrl: 'app/signup.html',
+     controller: 'ProfileController'
+    })
+     .when('/login', {
+      templateUrl: 'app/login.html',
+     //controller: 'EatController'
+    })
+
     
     .otherwise({
       redirectTo: '/nowhere'
@@ -64,7 +73,8 @@ $routeProvider
 
   $scope.beginReservation = function(){
     $scope.reserveSuccess = false;
-    console.log(this.meal);
+    //console.log('compare', Date.parse(this.meal.date) > Date.now());
+    //console.log(Date.now())
     $scope.showNameForm = true;
     // set meal object to be meal just clicked on
     $scope.meal = this.meal;
@@ -95,18 +105,54 @@ $routeProvider
     });
   };
 
-
-
   $scope.reserve = function(){
     console.log($scope.meal);
-  }
+  };
 
   $scope.getMeals();
 
 })
+.controller('ProfileController', function($scope, Profile){
+  angular.extend($scope, Profile);
+
+  $scope.profile = {
+    tab : 0
+  };
+
+  $scope.addProfile = function(profile){
+    console.log(profile);
+    Profile.postProfile(profile)
+    .then(function(data){
+      console.log('profile data returned', data);
+      $scope.sentProfile = true;
+      $scope.profile = {
+        tab : 0
+      };
+    });
+  };
+})
 /////////////////////////////////////////
 /////////////////////
 // Cook Factory ////
+.factory('Profile', function($http){
+  var postProfile = function( profile ){
+    console.log('post profile', profile);
+    return $http({
+      method: 'POST',
+      url: '/api/profiles',
+      data: profile
+    }).then(function(resp){
+      console.log('Posted!', resp.data);
+      return resp.data;
+    });
+  };
+
+  return {
+    postProfile : postProfile
+  };
+
+})
+
 .factory('Cook', function($http){
   var postMeal = function( mealObject ){
     console.log('post mealObject', mealObject);
