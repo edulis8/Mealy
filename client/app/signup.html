@@ -1,8 +1,9 @@
 <div class="container">
   <div class="jumbotron">
-    <form name="profile-create" ng-submit="")>
+    <form name="profile-create" ng-submit="addProfile(profile)")>
 
       <!-- <div class="error" ng-if='shortener.shortenInput.$invalid'>Please enter a valid URL</div> -->
+      <h2>Sign Up!</h2>
       <h3>Create an Profile</h3>
 
       <input class="form-control" type='text' name='firstname' ng-model='profile.firstname' placeholder="Your first name" required>
@@ -13,9 +14,9 @@
       <br>
       <p class="lead">Preferences:</p>
 
-      <p>I'll eat anything: <input type='checkbox' value='all' name=checked checked ng-model='all'></p>      
-      <p>I'm vegetarian: <input type='checkbox' value='veg' ng-model='veg'></p>    
-      <p>I am gluten-free: <input type='checkbox' value='glut' ng-model='glut'></p>
+      <p>I'll eat anything: <input type='checkbox' value='all' name=checked checked ng-model='profile.all'></p>      
+      <p>I'm vegetarian: <input type='checkbox' value='veg' ng-model='profile.veg'></p>    
+      <p>I am gluten-free: <input type='checkbox' value='glut' ng-model='profile.glut'></p>
 
       <button class="btn btn-primary" ng-disabled ='profile-create.$invalid'>Submit</button>
 

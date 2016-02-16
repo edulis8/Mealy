@@ -30,7 +30,19 @@ var mealsSchema = mongoose.Schema ({
     eaters: []
   });
 
-
 var Meal = mongoose.model('Meals', mealsSchema);
+/////
+var usersSchema = mongoose.Schema({
+  firstname: String,
+  lastname: String,
+  password: String,
+  tab: Number,
+  veg: Boolean,
+  glut: Boolean,
+  all: Boolean
+});
 
-module.exports = Meal;
+var User = mongoose.model('Users', usersSchema);
+
+exports.User = User;
+exports.Meal = Meal;

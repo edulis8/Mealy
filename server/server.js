@@ -3,7 +3,7 @@ var mongoose = require('mongoose');//need?
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
-var Meal = require('./db.js')
+var db = require('./db.js')
 
 var app = express();
 app.use(morgan('dev'));
@@ -37,7 +37,7 @@ app.get('/api/meals', function(req, res){
 app.post('/api/meals', function(req, res){
   console.log('ping', req.body);
   var incoming = req.body;
-  var meal = new Meal({
+  var meal = new db.Meal({
     menu: incoming.menu,
     veg: incoming.veg,
     glut: incoming.glut,
@@ -63,7 +63,7 @@ app.post('/api/eaters', function(req, res){
   console.log('api/meals', req.body);
   var incoming = req.body;
 
-  Meal.findOne({ _id : incoming._id }).exec(function(err, match){
+  db.Meal.findOne({ _id : incoming._id }).exec(function(err, match){
     if(err){
       console.log('error api/eaters saving');
       res.send(500);
@@ -82,6 +82,32 @@ app.post('/api/eaters', function(req, res){
       });
     } 
   });
+
+});
+
+app.post('/api/profiles', function(req, res){
+  console.log('api/profiles', req.body);
+  var incoming = req.body;
+  var firstname = req.body.firstname;
+  var lastname = req.body.lastname;
+
+  db.User.findOne({ lastname : lastname, firstname: firstname})
+    .exec(function(err, user){
+      if(err){res.sendStatus(500); return;}
+      if(!user){
+        console.log('!user', !user);
+
+        var newUser = new db.User(req.body);
+        newUser.save(function(err, newUser){
+          if(err){res.sendStatus(500); return;}
+          console.log('success saving a user')
+        });
+      } else {
+        console.log('Account already exists for that name');
+        res.send('account already exists')
+      }
+    });
+
 
 });
  
