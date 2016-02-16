@@ -22,7 +22,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client'));
 
-
 // session
 // app.use(session({
 //   secret : 'mySecret',// should be unique and long, see ruby doc
@@ -30,6 +29,59 @@ app.use(express.static(__dirname + '/../client'));
 //   resave: false,
 //   saveUninitialized: false
 // }));
+
+// app.get('/links', util.checkUser, handler.fetchLinks);
+// app.post('/links', handler.saveLink);
+
+// exports.fetchLinks = function(req, res) {
+//   // video 1hr
+//   Link.find({}).exec(function(err, links) {
+//     if(err) {
+//       console.log(err);
+//       res.send(500);
+//       return;
+//     }
+//     res.send(200, links);
+//   })
+// };
+
+// exports.saveLink = function(req, res) {
+//   var uri = req.body.url;
+
+//   if (!util.isValidUrl(uri)) {
+//     console.log('Not a valid url: ', uri);
+//     return res.send(404);
+//   }
+
+//   Link.findOne({ url: uri }).exec(function(err, found) {
+//     if (found) {
+//       res.send(200, found);
+//     } else {
+//       util.getUrlTitle(uri, function(err, title) {
+//         if (err) {
+//           console.log('Error reading URL heading: ', err);
+//           return res.send(404);
+//         }
+
+//         var link = new Link({
+//           url: uri,
+//           title: title,
+//           base_url: req.headers.origin,
+//           visits: 0
+//         });
+
+//         link.save(function(err, newLink) {
+//           if(err) {
+//             res.send(500);
+//           } else {
+//             res.send(200, newLink);
+//           }
+//         });
+//       });
+//     }
+//   });
+// };
+
 
 
 
