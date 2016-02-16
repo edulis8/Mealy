@@ -7,7 +7,7 @@ angular.module('mealy', [
 $routeProvider
     .when('/', {
       templateUrl: 'app/home.html',
-      controller: 'HomeController'
+      //controller: 'HomeController'
     })
      .when('/cook', {
       templateUrl: 'app/cook.html',
@@ -45,7 +45,7 @@ $routeProvider
     console.log('post mealObject', mealObject);
     return $http({
       method: 'POST',
-      url: '/api/links',
+      url: '/api/meals',
       data: mealObject
     }).then(function(resp){
       console.log('Posted!', resp.data);
