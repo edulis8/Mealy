@@ -117,6 +117,7 @@ app.post('/api/profiles', function(req, res){
           res.send(newUser._id);
         });
       // if user exists
+      // TODO: make this an else if ? and then add other else?
       } else {
         console.log('If on signup: Account already exists for that name. Go to login.');
         //create session with user
