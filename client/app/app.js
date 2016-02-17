@@ -25,7 +25,6 @@ $routeProvider
       templateUrl: 'app/login.html',
       controller: 'ProfileController'
 
-     //controller: 'EatController'
     })
 
     
@@ -74,6 +73,7 @@ $routeProvider
   console.log($scope.showNameForm);
 
   $scope.beginReservation = function(){
+    // WAS TRYING TO GET A PROFILE BY SENDING THE _id STORED IN LOCAL STORAGE WHICH MATCHES THE MONGO _id
    // console.log('id about to be send', window.localStorage.sessionID);
     //console.log({'sessionID' : window.localStorage.sessionID})
     //Eat.getProfile({'sessionID' : window.localStorage.sessionID})
@@ -216,7 +216,7 @@ $routeProvider
       return resp.data;
     });
   };
-
+///// LATEST FEATURE NOT SURE IF WORKING, TRYING TO GET A PROFILE DOWN
    var getProfile = function(){
     return $http({
       method: 'GET',
