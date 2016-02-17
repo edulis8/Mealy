@@ -74,16 +74,16 @@ $routeProvider
   console.log($scope.showNameForm);
 
   $scope.beginReservation = function(){
-    console.log('id about to be send', window.localStorage.sessionID);
-    console.log({'sessionID' : window.localStorage.sessionID})
-    Eat.getProfile({'sessionID' : window.localStorage.sessionID})
-    .then(function(profile){
-      console.log('profile returned from Eat.getProfile', profile);
-      $scope.currentProfile = profile;
-    });
-
+   // console.log('id about to be send', window.localStorage.sessionID);
+    //console.log({'sessionID' : window.localStorage.sessionID})
+    //Eat.getProfile({'sessionID' : window.localStorage.sessionID})
+   // .then(function(profile){
+     // console.log('profile returned from Eat.getProfile', profile);
+    //  $scope.currentProfile = profile;
+   // });
 
     $scope.reserveSuccess = false;
+    $scope.showEatersBool = false;
     //console.log('compare', Date.parse(this.meal.date) > Date.now());
     //console.log(Date.now())
     $scope.showNameForm = true;
