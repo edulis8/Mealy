@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="jumbotron">
+    <form name="profile-create2" ng-submit="addProfile(loginInfo)")>
+
+      <!-- <div class="error" ng-if='shortener.shortenInput.$invalid'>Please enter a valid URL</div> -->
+      <h2>Login!</h2>
+
+      <input class="form-control" type='text' name='firstname' ng-model='loginInfo.firstname' placeholder="Your first name" required>
+      <br>
+      <input class="form-control" type='text' name='lastname' ng-model='loginInfo.lastname' placeholder="Your last name" required>
+      <br>
+      <input class="form-control" type='text' name='password' ng-model='loginInfo.password' placeholder="Your password" required>
+      <br>
+
+      <button class="btn btn-primary" ng-disabled ='profile-create2.$invalid'>Submit</button>
+
+    </form>
+
+  </div>
+  <div class="jumbotron center-block" ng-if='loggedIn'>
+    <h3>Congrats! You are logged in! Want to:</h3>
+    <br>
+    <div class="center-block">
+
+      <a href='#/cook' class="btn btn-block btn-lg btn-primary">Cook</a> 
+      <a href="#/eat" class="btn btn-block btn-lg btn-info">Eat</a>
+    </div> 
+  </div>
+    <!-- <div ng-if='sent'>
+      success msg
+    </div> -->
+</div>

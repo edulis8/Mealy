@@ -12,8 +12,10 @@
   
 <h1 class="text-primary">Mealy: <small>a meal reservation app for people who love to eat together</small></h1>
 <div class="pull-right">
-  <a href="#/login" class="btn btn-default">Login</a href="#/">
-  <a href="#/signup" class="btn btn-default">Signup</a href="#/">
+  <a ng-hide='loggedIn' href="#/login" class="btn btn-default">Login</a>
+  <a ng-hide='loggedIn' href="#/signup" class="btn btn-default">Signup</a>
+
+  <a ng-show='loggedIn' href="#/logout" class="btn btn-default">Logout</a>
 </div>
 
 <div ng-view></div>

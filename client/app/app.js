@@ -23,6 +23,8 @@ $routeProvider
     })
      .when('/login', {
       templateUrl: 'app/login.html',
+      controller: 'ProfileController'
+
      //controller: 'EatController'
     })
 
@@ -34,7 +36,7 @@ $routeProvider
 })
 // Cook Controller //////
 .controller('CookController', function($scope, Cook, Eat){
-  angular.extend($scope, Cook);
+  angular.extend($scope, Cook, Eat);
 
   $scope.showNameForm = false;
   $scope.reserveSuccess = false;
@@ -72,12 +74,22 @@ $routeProvider
   console.log($scope.showNameForm);
 
   $scope.beginReservation = function(){
+    console.log('id about to be send', window.localStorage.sessionID);
+    console.log({'sessionID' : window.localStorage.sessionID})
+    Eat.getProfile({'sessionID' : window.localStorage.sessionID})
+    .then(function(profile){
+      console.log('profile returned from Eat.getProfile', profile);
+      $scope.currentProfile = profile;
+    });
+
+
     $scope.reserveSuccess = false;
     //console.log('compare', Date.parse(this.meal.date) > Date.now());
     //console.log(Date.now())
     $scope.showNameForm = true;
     // set meal object to be meal just clicked on
     $scope.meal = this.meal;
+
     console.log($scope.meal);
   };
 
@@ -116,22 +128,39 @@ $routeProvider
 /////////////////////
 // Profile Controller ////
 
-.controller('ProfileController', function($scope, Profile){
+.controller('ProfileController', function($rootScope, $scope, $location, $window, Profile){
   angular.extend($scope, Profile);
 
   $scope.profile = {
     tab : 0
   };
 
+  $rootScope.loggedIn = !!window.localStorage.sessionID;    
+
+  console.log('!!', !!window.localStorage.sessionID);
+  console.log('before login', $rootScope.loggedIn);
+
+  $scope.loginInfo = {};
+
   $scope.addProfile = function(profile){
     console.log(profile);
     Profile.postProfile(profile)
     .then(function(data){
       console.log('profile data returned', data);
-      $scope.sentProfile = true;
-      $scope.profile = {
-        tab : 0
-      };
+      $rootScope.loggedIn = true;
+      console.log('after login', $rootScope.loggedIn);
+
+      // $scope.profile = {
+      //   tab : 0
+      // };
+      //$window.localStorage.setItem('sessionID', data);
+      window.localStorage.sessionID = data;     
+
+      // if(data){
+      //   console.log('here');
+      //   $location.path(data);
+      // }
+
     });
   };
 })
@@ -188,6 +217,17 @@ $routeProvider
     });
   };
 
+   var getProfile = function(){
+    return $http({
+      method: 'GET',
+      url: '/api/getprofile',
+    })
+    .then(function(resp){
+      console.log('getProfile data', resp.data);
+      return resp.data;
+    });
+  };
+
   var updateMeal = function( mealObject ){
     console.log('update mealObject', mealObject);
     return $http({
@@ -200,8 +240,11 @@ $routeProvider
     });
   };
 
+
+
   return {
     updateMeal: updateMeal,
-    getMeals: getMeals
+    getMeals: getMeals,
+    getProfile: getProfile
   };
 });

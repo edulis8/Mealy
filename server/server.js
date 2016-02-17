@@ -2,8 +2,10 @@ var express = require('express');
 var mongoose = require('mongoose');//need?
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var util = require('./utility.js');
 
-var db = require('./db.js')
+
+var db = require('./db.js');
 
 var app = express();
 app.use(morgan('dev'));
@@ -14,7 +16,7 @@ app.use(express.static(__dirname + '/../client'));
 
 // session
 // app.use(session({
-//   secret : 'mySecret',// should be unique and long, see ruby doc
+//   secret : 'fdskljkjdfsdsfjk',// should be unique and long, see ruby doc
 //   // forces a session to be saved back to the session store:
 //   resave: false,
 //   saveUninitialized: false
@@ -24,7 +26,7 @@ app.use(express.static(__dirname + '/../client'));
 // app.post('/links', handler.saveLink);
 
 app.get('/api/meals', function(req, res){
-  Meal.find({}).exec(function(err, meals){
+  db.Meal.find({}).exec(function(err, meals){
     if(err){
       console.log(err);
       res.send(500);
@@ -85,15 +87,24 @@ app.post('/api/eaters', function(req, res){
 
 });
 
+app.get('/api/getprofile', function(req, res){
+  console.log('ping')
+  console.log(req.body.sessionID)
+  var id = req.body.sessionID;
+  console.log(id)
+});
+
 app.post('/api/profiles', function(req, res){
   console.log('api/profiles', req.body);
   var incoming = req.body;
   var firstname = req.body.firstname;
   var lastname = req.body.lastname;
 
+
   db.User.findOne({ lastname : lastname, firstname: firstname})
     .exec(function(err, user){
       if(err){res.sendStatus(500); return;}
+      console.log('user', user);
       if(!user){
         console.log('!user', !user);
 
@@ -101,10 +112,21 @@ app.post('/api/profiles', function(req, res){
         newUser.save(function(err, newUser){
           if(err){res.sendStatus(500); return;}
           console.log('success saving a user')
+          // create session
+          //util.createSession(req, newUser);
+          res.send(newUser._id);
         });
+      // if user exists
       } else {
-        console.log('Account already exists for that name');
-        res.send('account already exists')
+        console.log('If on signup: Account already exists for that name. Go to login.');
+        //create session with user
+        if(incoming.password === user.password){
+          console.log(user.password, incoming.password)
+          res.send(user._id);
+        }
+        //util.createSession(req, newUser);
+
+        //res.send('/login');
       }
     });
 
