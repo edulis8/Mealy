@@ -130,10 +130,13 @@ app.post('/api/profiles', function(req, res){
         //res.send('/login');
       }
     });
-
-
 });
  
+var port = process.env.PORT || 8000;
+
+app.listen(port);
+
+console.log('Server now listening on port ' + port);
 
   // meal.save(function(err, newMeal){
   //   if(err){
@@ -199,8 +202,4 @@ app.post('/api/profiles', function(req, res){
 //     //res.redirect('hello world');
 // });
 
-var port = process.env.PORT || 8000;
 
-app.listen(port);
-
-console.log('Server now listening on port ' + port);

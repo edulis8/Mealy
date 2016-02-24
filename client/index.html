@@ -9,14 +9,17 @@
 
 
 <body>
-  
-<h1 class="text-primary"><a href="#/">Mealy:</a> <small>a meal reservation app for people who love to eat together</small></h1>
-<div class="pull-right">
-  <a ng-hide='loggedIn' href="#/login" class="btn btn-default">Login</a>
-  <a ng-hide='loggedIn' href="#/signup" class="btn btn-default">Signup</a>
-
-  <a ng-show='loggedIn' href="#/logout" class="btn btn-default">Logout</a>
-</div>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <h1 class="text-primary pull-left"><a href="#/">Mealy:</a> <small>a meal reservation app for people who love to e
+    at together</small></h1>
+    <div class="pull-right">
+      <a ng-hide='loggedIn' href="#/login" class="btn btn-lg btn-default">Login</a>
+      <a ng-hide='loggedIn' href="#/signup" class="btn btn-lg btn-default">Signup</a>
+      <a ng-show='loggedIn' href="#/logout" class="btn btn-lg btn-default">Logout</a>
+    </div>
+  </div>
+    </nav>
 
 <div ng-view></div>
 
