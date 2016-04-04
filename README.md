@@ -10,7 +10,7 @@ Users can post meals and sign up for listed meals. Cooks can view how many eater
 ## Table of Contents
 
   1. [Requirements](#requirements)
-  2. [Installing Dependencies](#installing-dependencies
+  2. [Installing Dependencies](#installing-dependencies)
 
 ## Requirements
 
